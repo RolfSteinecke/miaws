@@ -1,0 +1,8 @@
+_id: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+type: Workspace
+parentId: null
+modified: 1623311333519
+created: 1623311333519
+name: MIA-API 0.1
+description: API zur Komminukation mit MIA
+scope: design
