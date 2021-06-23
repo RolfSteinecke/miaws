@@ -1,0 +1,10 @@
+_id: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f8011f75ee3
+type: RequestGroup
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1623311333479
+created: 1623311333479
+name: Termin
+description: Aktionen zu Terminen
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1623311333479

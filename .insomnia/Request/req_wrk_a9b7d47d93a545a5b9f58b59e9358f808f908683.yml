@@ -1,0 +1,27 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f808f908683
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f806f44e900
+modified: 1623311333387
+created: 1623311333387
+url: "{{ base_url }}/Mitgliedschaft/DatumLetztesBeratungsdokument"
+name: Abfrage des Erstellungsdatums des letzten Dokuments zu einer Beratung
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: MitgliedschaftID
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333387
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

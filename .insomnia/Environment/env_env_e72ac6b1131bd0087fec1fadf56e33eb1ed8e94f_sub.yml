@@ -1,0 +1,15 @@
+_id: env_env_e72ac6b1131bd0087fec1fadf56e33eb1ed8e94f_sub
+type: Environment
+parentId: env_e72ac6b1131bd0087fec1fadf56e33eb1ed8e94f
+modified: 1623311333506
+created: 1623311333506
+name: OpenAPI env
+data:
+  scheme: https
+  base_path: /RolfSteinecke/MIA/0.1
+  host: virtserver.swaggerhub.com
+  appid: appid
+dataPropertyOrder: null
+color: null
+isPrivate: false
+metaSortKey: 1623311333506

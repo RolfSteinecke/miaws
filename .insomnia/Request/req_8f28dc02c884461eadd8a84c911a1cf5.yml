@@ -1,0 +1,25 @@
+_id: req_8f28dc02c884461eadd8a84c911a1cf5
+type: Request
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1623311597762
+created: 1623311579918
+url: ""
+name: login
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: ""
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1623311579918
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

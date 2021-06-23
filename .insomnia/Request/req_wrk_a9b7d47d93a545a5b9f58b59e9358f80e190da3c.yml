@@ -1,0 +1,27 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f80e190da3c
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f808c41ae88
+modified: 1623311333423
+created: 1623311333423
+url: "{{ base_url }}/Person/Dokumente/"
+name: Abfrage der Dokumente einer Person
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: PersonID
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333423
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

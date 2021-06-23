@@ -1,0 +1,10 @@
+_id: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f807dbba99e
+type: RequestGroup
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1623311333473
+created: 1623311333473
+name: Beratung
+description: Aktionen zu Beratungen
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1623311333473

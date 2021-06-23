@@ -1,0 +1,30 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f802736fab2
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f8035d0f5fb
+modified: 1623311333446
+created: 1623311333446
+url: "{{ base_url }}/login/1.0"
+name: Anmelden als Mitarbeiter in MIA
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: LoginName
+    disabled: false
+    value: string
+  - name: Kennwort
+    disabled: false
+    value: string
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333446
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

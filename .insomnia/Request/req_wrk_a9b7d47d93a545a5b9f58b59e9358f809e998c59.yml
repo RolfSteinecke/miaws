@@ -1,0 +1,27 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f809e998c59
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f808c41ae88
+modified: 1623311333441
+created: 1623311333441
+url: "{{ base_url }}/Person"
+name: Abfrage der Daten einer Person
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: PersonID
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333441
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

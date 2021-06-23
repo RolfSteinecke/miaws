@@ -1,0 +1,30 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f8048e39a7e1
+type: Request
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1623311333412
+created: 1623311333412
+url: "{{ base_url }}/Mitgliedschaft/Dokumente/"
+name: Abfrage der Dokumente einer Mitgliedschaft
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: MitgliedschaftID
+    disabled: false
+    value: "0"
+  - name: PersonID
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333412
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

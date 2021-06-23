@@ -1,0 +1,27 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f8038046720
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f806f44e900
+modified: 1623311333419
+created: 1623311333419
+url: "{{ base_url }}/Mitgliedschaft"
+name: Abfrage der Daten einer Mitgliedschaft
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: MitgliedschaftNr
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333419
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

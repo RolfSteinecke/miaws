@@ -1,0 +1,10 @@
+_id: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f80de604456
+type: RequestGroup
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1623311333459
+created: 1623311333459
+name: Kennzeichen
+description: Aktionen zu Kennzeichnern
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1623311333459

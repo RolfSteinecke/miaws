@@ -1,0 +1,27 @@
+_id: req_wrk_a9b7d47d93a545a5b9f58b59e9358f8065b1a784
+type: Request
+parentId: fld_wrk_a9b7d47d93a545a5b9f58b59e9358f807dbba99e
+modified: 1623311333360
+created: 1623311333360
+url: "{{ base_url }}/Beratung/ListeBeratungsthemenDMB"
+name: Abfrage der BeratungsthemenDMB zu einer Beratung
+description: ""
+method: GET
+body: {}
+parameters:
+  - name: BeratungID
+    disabled: false
+    value: "0"
+  - name: appid
+    disabled: false
+    value: "{{ appid }}"
+headers: []
+authentication: {}
+metaSortKey: -1623311333360
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

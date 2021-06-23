@@ -1,0 +1,1532 @@
+_id: spc_70751953b53c449d8dab8f3792bc42d3
+type: ApiSpec
+parentId: wrk_a9b7d47d93a545a5b9f58b59e9358f80
+modified: 1624435436217
+created: 1623311333520
+fileName: MIA-API 0.1
+contents: >-
+  {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "MIA-API",
+      "description": "API zur Komminukation mit MIA",
+      "version": "0.1"
+    },
+    "servers": [
+      {
+        "url": "10.20.91.24:8100/MIA/"
+      },
+      {
+        "url": "localhost:8100/MIA/"
+      }
+    ],
+    "security": [
+      {
+        "app_id": []
+      }
+    ],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Autorisierung"
+      },
+      {
+        "name": "Person",
+        "description": "Aktionen zu Personen"
+      },
+      {
+        "name": "Mitgliedschaft",
+        "description": "Aktionen zu Mitgliedschaften"
+      },
+      {
+        "name": "Dokument",
+        "description": "Aktionen zu Dokumenten"
+      },
+      {
+        "name": "Termin",
+        "description": "Aktionen zu Terminen"
+      },
+      {
+        "name": "Beratung",
+        "description": "Aktionen zu Beratungen"
+      },
+      {
+        "name": "Mietobjekt",
+        "description": "Aktionen zu Mietobjekten"
+      },
+      {
+        "name": "Kennzeichen",
+        "description": "Aktionen zu Kennzeichnern"
+      },
+      {
+        "name": "Kataloge",
+        "description": "Kataloge aus MIA"
+      }
+    ],
+    "paths": {
+      "/login/1.0": {
+        "get": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Anmelden als Mitarbeiter in MIA",
+          "operationId": "login",
+          "parameters": [
+            {
+              "name": "LoginName",
+              "in": "query",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Kennwort",
+              "in": "query",
+              "description": "md5-Hash des Passworts für MIA",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Anmeldung erfolgreich, Rückgabe eines Tokens",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Anmeldung nicht erfolgreich"
+            }
+          }
+        }
+      },
+      "/logout": {
+        "get": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Abmelden von MIA",
+          "operationId": "logout",
+          "responses": {
+            "200": {
+              "description": "Abmeldung erfolgreich",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_200"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Person": {
+        "get": {
+          "tags": [
+            "Person"
+          ],
+          "summary": "Abfrage der Daten einer Person",
+          "operationId": "getPersonData",
+          "parameters": [
+            {
+              "name": "PersonID",
+              "in": "query",
+              "description": "Eindeutige ID der Person",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Personendaten",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Person nicht gefunden"
+            }
+          }
+        },
+        "post": {
+          "summary": "Aktualisieren von Daten einer Person",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Personendaten erfolgreich aktualisiert"
+            },
+            "400": {
+              "description": "Invalid request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_400"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Person/Termin/": {
+        "get": {
+          "tags": [
+            "Person",
+            "Termin"
+          ],
+          "summary": "Abfrage eines Termins",
+          "operationId": "getTermin",
+          "parameters": [
+            {
+              "name": "TerminID",
+              "in": "query",
+              "description": "ID des Termins",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Daten eines Termins",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Termin"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Termin nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Person/Termine/": {
+        "get": {
+          "tags": [
+            "Person",
+            "Termin"
+          ],
+          "summary": "Abfrage der Termine einer Person",
+          "operationId": "getTermine",
+          "parameters": [
+            {
+              "name": "PersonID",
+              "in": "query",
+              "description": "PersonID der Person",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste von Terminen",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Termine"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Person nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Person/Dokument/": {
+        "get": {
+          "tags": [
+            "Person",
+            "Dokument"
+          ],
+          "summary": "Abfrage eines Dokuments",
+          "operationId": "getPersonDokument",
+          "parameters": [
+            {
+              "name": "DokumentID",
+              "in": "query",
+              "description": "ID des Dokumentes",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Einzelnes Dokument",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Dokument"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Dokument nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Person/Dokumente/": {
+        "get": {
+          "tags": [
+            "Person",
+            "Dokument"
+          ],
+          "summary": "Abfrage der Dokumente einer Person",
+          "operationId": "getPersonDokumente",
+          "parameters": [
+            {
+              "name": "PersonID",
+              "in": "query",
+              "description": "PersonID der Person",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste von Dokumenten",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Dokumente"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Person nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft"
+          ],
+          "summary": "Abfrage der Daten einer Mitgliedschaft",
+          "operationId": "getMitgliedschaft",
+          "parameters": [
+            {
+              "name": "MitgliedschaftNr",
+              "in": "query",
+              "description": "Mitgliedschaftsnummer",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Daten einer Mitgliedschaft",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Mitgliedschaft"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/ListePersonenZuMitgliedschaft": {
+        "get": {
+          "tags": [
+            "Person"
+          ],
+          "summary": "Abfrage der Personen zu einer Mitgliedschaft",
+          "operationId": "getPersonen2Mitgliedschaft",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "Id der Mitgliedschaft",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste von Personen",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Personen"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/Dokumente/": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Dokumente"
+          ],
+          "summary": "Abfrage der Dokumente einer Mitgliedschaft",
+          "operationId": "getMitgliedschaftDokumente",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "ID der Mitgliedschaft",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            {
+              "name": "PersonID",
+              "in": "query",
+              "description": "ID der Person",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste von Dokumenten",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Dokumente"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Person nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/KennzeichenMitgliedschaft": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Kennzeichen"
+          ],
+          "summary": "Gibt die Kennzeichen zurück, die einer Mitgliedschaft zugeordnet sind",
+          "operationId": "getKennzMitgliedschaft",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "Id der Mitgliedschaft, zu der die zugeordneten Kennzeichen abgerufen werden sollen",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Kennzeichen zu einer Mitgliedschaft",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/KennzeichenMitgliedschaftListe"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/Mietobjekte": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Mietobjekt"
+          ],
+          "summary": "Abfrage der Mietobjekte einer Mitgliedschaft",
+          "operationId": "getMitgliedschaftMietobjekte",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste der Mietobjekte einer Mitgliedschaft",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Mietobjekte"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mietobjekt": {
+        "get": {
+          "tags": [
+            "Mietobjekt"
+          ],
+          "summary": "Abfrage der Daten eines Mietobjekts",
+          "operationId": "getMietobjekt",
+          "parameters": [
+            {
+              "name": "MietobjektID",
+              "in": "query",
+              "description": "ID des Mietobjekts",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Daten eines Mietobjekts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Mietobjekt"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mietobjekt nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Beratung": {
+        "get": {
+          "tags": [
+            "Beratung"
+          ],
+          "summary": "Abfrage einer einzelnen Beratung",
+          "operationId": "getBeratung",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            {
+              "name": "BeratungID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Eine Beratung zu einer Mitgliedschaft",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Beratung"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/ListeBeratungen": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Beratung"
+          ],
+          "summary": "Abfrage der Beratungen zu einer Mitgliedschaft",
+          "operationId": "getBeratungenMitgliedschaft",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste der Beratungen zu einer Mitgliedschaft",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Beratungen"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/DatumLetztesBeratungsdokument": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Beratung"
+          ],
+          "summary": "Abfrage des Erstellungsdatums des letzten Dokuments zu einer Beratung",
+          "operationId": "getMitgliedschaftDatumLetztesBeratungsdokument",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Erstellungsdatum des letzten Beratungsdokuments",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_200_1"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/AnzahlBeratungsdokumente": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Beratung"
+          ],
+          "summary": "Anzahl der Beratungsdokumente",
+          "operationId": "getAnzahlBeratungsdokumente",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Anzahl von Beratungsdokumenten",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_200_2"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/AnzahlBeratungen": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Beratung"
+          ],
+          "summary": "Anzahl der Beratungen",
+          "operationId": "getAnzahlBeratungen",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Anzahl von Beratungen",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_200_2"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Mitgliedschaft/DatumLetzteBeratung": {
+        "get": {
+          "tags": [
+            "Mitgliedschaft",
+            "Beratung"
+          ],
+          "summary": "Datum der letzten Beratung",
+          "operationId": "getDatumLetzteBeratung",
+          "parameters": [
+            {
+              "name": "MitgliedschaftID",
+              "in": "query",
+              "description": "MitgliedschaftID",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Datum der letzten Beratung",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/inline_response_200_1"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Mitgliedschaft nicht gefunden"
+            }
+          }
+        }
+      },
+      "/BeratungsthemaDMB": {
+        "get": {
+          "tags": [
+            "Beratung"
+          ],
+          "summary": "Abfrage der Daten eines BeratungsthemasDMB",
+          "operationId": "getBeratungsthemaDMB",
+          "parameters": [
+            {
+              "name": "ID",
+              "in": "query",
+              "description": "ID des Beratungsthemas aus dem DMB-Katalog",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Daten des Beratungsthemas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BeratungsthemaDMB"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Beratungsthema nicht gefunden"
+            }
+          }
+        }
+      },
+      "/Beratung/ListeBeratungsthemenDMB": {
+        "get": {
+          "tags": [
+            "Beratung"
+          ],
+          "summary": "Abfrage der BeratungsthemenDMB zu einer Beratung",
+          "operationId": "getBeratungsthemenDMB",
+          "parameters": [
+            {
+              "name": "BeratungID",
+              "in": "query",
+              "description": "ID der Beratung zum Abruf der zugeordneten Beratungsthemen aus dem DMB-Katalog",
+              "required": true,
+              "style": "form",
+              "explode": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste der Beratungsthemen aus dem DMB-Katalog zu einer Beratung",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BeratungsthemenDMB"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Beratung nicht gefunden"
+            }
+          }
+        }
+      },
+      "/BeratungsthemenDMB_Katalog": {
+        "get": {
+          "tags": [
+            "Beratung",
+            "Kataloge"
+          ],
+          "summary": "Abfrage des Katalogs der BeratungsthemenDMB",
+          "operationId": "getBeratungsthemenDMB_Katalog",
+          "responses": {
+            "200": {
+              "description": "Liste der Beratungsthemen aus dem DMB-Katalog zu einer Beratung",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BeratungsthemenDMB"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Beratungsarten_Katalog": {
+        "get": {
+          "tags": [
+            "Beratung",
+            "Kataloge"
+          ],
+          "summary": "Abfrage des Katalogs der Beratungsarten",
+          "operationId": "getBeratungsarten_Katalog",
+          "responses": {
+            "200": {
+              "description": "Liste der Beratungsarten",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/KatalogBeratungsarten"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Person": {
+          "required": [
+            "Mandant",
+            "Name",
+            "PersonID"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "PersonID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Vorame": {
+              "type": "string"
+            },
+            "Titel": {
+              "type": "string"
+            },
+            "Firma": {
+              "type": "string"
+            },
+            "Geburtsdatum": {
+              "type": "string"
+            },
+            "TelefonPrivat": {
+              "type": "string"
+            },
+            "TelefonMobil": {
+              "type": "string"
+            },
+            "TelefonDienstlich": {
+              "type": "string"
+            },
+            "Fax": {
+              "type": "string"
+            },
+            "EMail": {
+              "type": "string"
+            },
+            "bevKommunikation": {
+              "type": "string"
+            },
+            "bevAnrufzeiten": {
+              "type": "string"
+            },
+            "Memo": {
+              "type": "string"
+            },
+            "Rechtsform": {
+              "type": "string"
+            },
+            "PA_Strasse": {
+              "type": "string"
+            },
+            "PA_Hausnummer": {
+              "type": "integer"
+            },
+            "PA_Hausnummerzusatz": {
+              "type": "string"
+            },
+            "PA_PLZ": {
+              "type": "string"
+            },
+            "PA_Ort": {
+              "type": "string"
+            },
+            "PA_Adresszusatz": {
+              "type": "string"
+            },
+            "PA_Land": {
+              "type": "string"
+            },
+            "PA_ungueltig": {
+              "type": "boolean"
+            },
+            "PA_EMA": {
+              "type": "boolean"
+            },
+            "Aufnahmesperre": {
+              "type": "boolean"
+            },
+            "SchutzPersonendaten": {
+              "type": "boolean"
+            },
+            "Hausverwaltung": {
+              "type": "boolean"
+            },
+            "Vermieter": {
+              "type": "boolean"
+            },
+            "Anwalt": {
+              "type": "boolean"
+            },
+            "Kontakt": {
+              "type": "boolean"
+            },
+            "GesVertreterName": {
+              "type": "string"
+            },
+            "GesVertreterID": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "Personen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Person"
+          }
+        },
+        "Mitgliedschaft": {
+          "required": [
+            "Mandant",
+            "MitgliedschaftID",
+            "Mitgliedschaftsnummer"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Mitgliedschaftsnummer": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "MitgliedschaftID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Rolle": {
+              "type": "string"
+            },
+            "Anfangsdatum": {
+              "type": "string"
+            },
+            "Enddatum": {
+              "type": "string"
+            },
+            "StammberaterName": {
+              "type": "string"
+            },
+            "StammberaterID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Memo": {
+              "type": "string"
+            },
+            "SperreOnlinezugang": {
+              "type": "boolean"
+            },
+            "AkteDigitalisiert": {
+              "type": "boolean"
+            },
+            "SaldoMitgliedskonto": {
+              "type": "number"
+            },
+            "Verarbeitungssperre": {
+              "type": "boolean"
+            }
+          }
+        },
+        "KennzeichenMitgliedschaft": {
+          "required": [
+            "Mandant",
+            "id"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Bezeichnung": {
+              "type": "integer"
+            },
+            "icon": {
+              "type": "object"
+            }
+          }
+        },
+        "KennzeichenMitgliedschaftListe": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/KennzeichenMitgliedschaft"
+          }
+        },
+        "Termin": {
+          "required": [
+            "Mandant",
+            "id"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Kurztitel": {
+              "type": "string"
+            },
+            "Datum": {
+              "type": "string"
+            },
+            "Anfangszeit": {
+              "type": "string"
+            },
+            "Endzeit": {
+              "type": "string"
+            },
+            "Termintyp": {
+              "type": "string"
+            },
+            "TermintypID": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratungsort": {
+              "type": "string"
+            },
+            "BeratungsortID": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratungsart": {
+              "type": "string"
+            },
+            "BeratungsartID": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratungsthema": {
+              "type": "string"
+            },
+            "BeratungsthemaID": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Notiz": {
+              "type": "string"
+            }
+          }
+        },
+        "Termine": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Termin"
+          }
+        },
+        "Mietobjekt": {
+          "required": [
+            "Mandant",
+            "MitgliedschaftID",
+            "id"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Mitgliedschaftsnummer": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "MitgliedschaftID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "gueltig_von": {
+              "type": "string"
+            },
+            "gueltig_bis": {
+              "type": "string"
+            },
+            "ObjektNr": {
+              "type": "string"
+            },
+            "Strasse": {
+              "type": "string"
+            },
+            "Hausnummer": {
+              "type": "integer"
+            },
+            "Hausnummerzusatz": {
+              "type": "string"
+            },
+            "PLZ": {
+              "type": "string"
+            },
+            "Ort": {
+              "type": "string"
+            },
+            "Land": {
+              "type": "string"
+            },
+            "Hausverwaltung": {
+              "$ref": "#/components/schemas/Person"
+            },
+            "Vermieter": {
+              "$ref": "#/components/schemas/Person"
+            },
+            "Kontakte": {
+              "$ref": "#/components/schemas/Personen"
+            },
+            "BeraterID": {
+              "type": "integer",
+              "description": "PersonID des zuständigen Beraters (nur München)",
+              "format": "int64"
+            }
+          }
+        },
+        "Mietobjekte": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Mietobjekt"
+          }
+        },
+        "Dokument": {
+          "required": [
+            "DokumentID",
+            "Mandant"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "DokumentID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Erstellungsdatum": {
+              "type": "string"
+            },
+            "Thema": {
+              "type": "string"
+            },
+            "Kommentar": {
+              "type": "string"
+            },
+            "Dokumentart": {
+              "type": "string"
+            },
+            "ausgehend_jn": {
+              "type": "string"
+            },
+            "online_abrufbar": {
+              "type": "boolean"
+            },
+            "online_abgerufen": {
+              "type": "boolean"
+            },
+            "Eingangsdatum": {
+              "type": "string"
+            },
+            "MietobjektID": {
+              "type": "string"
+            },
+            "Annotation": {
+              "type": "string"
+            },
+            "finalisiert": {
+              "type": "boolean"
+            },
+            "Dokument_name": {
+              "type": "string"
+            },
+            "Dokument_ext": {
+              "type": "string"
+            },
+            "Dokument": {
+              "type": "object"
+            }
+          }
+        },
+        "Dokumente": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Dokument"
+          }
+        },
+        "Beratung": {
+          "required": [
+            "BeratungID",
+            "Mandant"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "BeratungID": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratung_am": {
+              "type": "string"
+            },
+            "Beratungsthema": {
+              "type": "string"
+            },
+            "BeratungsthemaID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Notizen": {
+              "type": "string"
+            },
+            "Beratungsstandort": {
+              "type": "string"
+            },
+            "BeratungsstandortID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Beratungsart": {
+              "type": "string"
+            },
+            "BeratungsartID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "Titel": {
+              "type": "string"
+            },
+            "MietobjektID": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "BeraterID": {
+              "type": "integer",
+              "description": "PersonID des Beraters",
+              "format": "int64"
+            }
+          }
+        },
+        "Beratungen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Beratung"
+          }
+        },
+        "BeratungsthemaDMB": {
+          "required": [
+            "ID",
+            "Mandant"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratungsthema": {
+              "type": "string"
+            }
+          }
+        },
+        "BeratungsthemenDMB": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/BeratungsthemaDMB"
+          }
+        },
+        "Beratungsart": {
+          "required": [
+            "ID",
+            "Mandant"
+          ],
+          "properties": {
+            "Mandant": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "Beratungart": {
+              "type": "string"
+            }
+          }
+        },
+        "KatalogBeratungsarten": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Beratungsart"
+          }
+        },
+        "inline_response_200": {
+          "properties": {
+            "session_token": {
+              "type": "string"
+            }
+          }
+        },
+        "body": {
+          "required": [
+            "PersonID"
+          ],
+          "type": "object",
+          "properties": {
+            "TelefonPrivat": {
+              "type": "string"
+            },
+            "TelefonMobil": {
+              "type": "string"
+            },
+            "TelefonDienstlich": {
+              "type": "string"
+            },
+            "Fax": {
+              "type": "string"
+            },
+            "EMail": {
+              "type": "string"
+            }
+          }
+        },
+        "inline_response_400": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "inline_response_200_1": {
+          "properties": {
+            "Datum": {
+              "type": "string"
+            }
+          }
+        },
+        "inline_response_200_2": {
+          "properties": {
+            "Anzahl": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "app_id": {
+          "type": "apiKey",
+          "name": "appid",
+          "in": "query"
+        }
+      }
+    }
+  }
+contentType: yaml
